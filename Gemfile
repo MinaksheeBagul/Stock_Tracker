@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 # devise will provide us complete authentication system for user log in and log out.
 gem 'devise'
+gem 'devise-bootstrap-views', '~> 1.0'
+gem 'iex-ruby-client'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
