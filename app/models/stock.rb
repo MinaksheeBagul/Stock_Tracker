@@ -1,4 +1,9 @@
 class Stock < ApplicationRecord
+    # one stock has many users.
+    has_many :user_stocks
+    has_many :users, through: :user_stocks
+
+    validates :name, :ticker, presence: true
     # defined a new_lookup method
     # self = not need to depend of instance var
     # directly call method from class
@@ -17,6 +22,11 @@ class Stock < ApplicationRecord
             # if we enter wrong entry in search bar then will return nill 
             return nil    
         end
+    end
+
+    # if ticker is already present in db, this method is to cross verify (check user_stocks_controller.rb)
+    def self.check_db(ticker_symbol)
+        where(ticker: ticker_symbol).first
     end
 end
 
