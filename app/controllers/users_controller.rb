@@ -4,4 +4,10 @@ class UsersController < ApplicationController
     # current user object who's logged in
     @tracked_stocks = current_user.stocks
   end
+
+  def my_friends
+    # will grabbing all users which current user grabbing.
+    @friends = current_user.friends
+  end
+    # check view folder after this
 end

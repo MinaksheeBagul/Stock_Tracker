@@ -1,7 +1,13 @@
 class User < ApplicationRecord
   # one user has multiple stocks 
   has_many :user_stocks
+  # user has many stocks
   has_many :stocks, through: :user_stocks
+  # user has many friends
+  has_many :friendships
+  # tracking friends
+  has_many :friends, through: :friendships
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
