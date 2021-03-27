@@ -10,4 +10,9 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
     # check view folder after this
+
+    def search
+      # render params that entered.
+      render json: params[:friend]
+    end
 end
