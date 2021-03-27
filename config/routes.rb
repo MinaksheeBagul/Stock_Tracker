@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'search_friend', to: 'users#search'
   resources :friendships, only: [:create, :destroy]
   # will create friendships controller
+  resources :users, only: [:show]
+  # check partial after this(_friend_result.html.erb)
   # check user controller after this
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def my_portfolio
+    @user = current_user
     # grabbing the user and seeing the stocks they are tracking
     # current user object who's logged in
     @tracked_stocks = current_user.stocks
@@ -10,6 +11,14 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
     # check view folder after this
+
+  def show
+    @user = User.find(params[:id])
+    # check show file in view- users - show 
+    # grabbing the stocks that user who is tracking
+    @tracked_stocks = @user.stocks
+    # check in show.html
+  end
 
     def search
       # render params that entered.
