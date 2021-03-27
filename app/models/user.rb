@@ -37,4 +37,45 @@ class User < ApplicationRecord
     return "#{first_name} #{last_name}" if first_name || last_name
     "Anonymous"
   end
+
+  # checking field in search 
+  def self.search(param)
+    # strip method, empty spaces it will read of that
+    param.strip!
+    # will get all unique values here
+    to_send_back = (first_name_matches(param) + last_name_matches(param) + email_matches(param)).uniq
+    # if no results back then return nill
+    return nil unless to_send_back
+    # if not nill then to-send-back
+    to_send_back
+  end
+
+  def self.first_name_matches(param)
+    matches('first_name', param)
+  end
+
+  def self.last_name_matches(param)
+    matches('last_name', param)
+  end
+
+  def self.email_matches(param)
+    matches('email', param)
+  end
+  # i.e self method bcz we are using same class ie. user
+  # i.e method that can take field name and match with our string.
+  def self.matches(field_name, param)
+    # matches the string or whatever param
+    where("#{field_name} like ?", "%#{param}%")
+  end
+
+  def except_current_user(users)
+    # its gonna reject the current user who's logged in and return list
+    users.reject { |user| user.id == self.id}
+  end
+
+  def not_friends_with?(id_of_friend)
+    # method for not showing results, if u r already friends with current user
+    # not exists the return true otherwise return false.
+    !self.friends.where(id: id_of_friend).exists?
+  end
 end
